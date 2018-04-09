@@ -1,0 +1,42 @@
+plugins {
+    id 'groovy'
+    id 'maven-publish'
+    id 'java-gradle-plugin'
+    id 'com.gradle.plugin-publish' version '0.9.10'
+    id 'net.researchgate.release' version '2.6.0'
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile localGroovy()
+    compile gradleApi()
+
+    testCompile gradleTestKit()
+    testCompile 'org.spockframework:spock-core:1.0-groovy-2.4', {
+        exclude group: 'org.codehaus.groovy'
+    }
+
+    testCompile "io.github.kdabir.directree:directree:0.3.2", {
+        exclude group: 'org.codehaus.groovy'
+    }
+}
+
+pluginBundle {
+    website = 'https://github.com/kdabir/roft'
+    vcsUrl = 'https://github.com/kdabir/roft'
+    description = 'Re-run only failed tests'
+    tags = ['testing', 'failed-tests', 'run', 'fast', 'quick', 'continuous']
+
+    plugins {
+        roft {
+            id = 'com.kdabir.rerun-only-failed-tests'
+            displayName = 'Gradle plugin'
+        }
+    }
+}
+
+afterReleaseBuild.dependsOn tasks.publishPlugins
+
