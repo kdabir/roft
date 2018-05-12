@@ -46,7 +46,7 @@ apply plugin: 'com.kdabir.rerun-only-failed-tests'
 
 ```
 
-4. Once changes look good, Send a pull request
+5. Once changes look good, Send a pull request
 
 
 #### Acknowledgement
